@@ -8,7 +8,10 @@ struct Country: Codable, Identifiable {
     var capital: [String]?
     var flag: String
     var population: Int
+    
+
 }
+
 
 struct CountryName: Codable {
     var common: String
@@ -20,9 +23,15 @@ struct CountryDetailView: View {
     var country: Country
     
     var body: some View {
-        Text("Country Name: \(country.name.common)")
+        Text("Country Flag: \(country.flag)")
             .padding()
+        Text("Country Official Name: \(country.name.official)")
             .navigationTitle("Country Detail")
+        Text("Country Common Name: \(country.name.common)")
+            .padding()
+        Text("Capital: \(country.capital?.first ?? "Unknown")")
+        
+        
     }
 }
 
@@ -41,13 +50,14 @@ struct CountriesView: View {
     }
     
     
-// new view created here :)
     var body: some View {
         NavigationView {
             List(countries) { country in
                 NavigationLink(destination: CountryDetailView(country: country)) { // use navigation link
                     VStack(alignment: .leading) {
                         Text("\(country.flag) • \(country.name.common)")
+                      
+                        
                     }
                 }
             }
